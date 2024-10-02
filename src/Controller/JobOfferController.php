@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\JobOffer;
 use App\Form\JobOfferType;
+use App\Repository\JobOfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Gemini;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,21 +19,59 @@ class JobOfferController extends AbstractController
     #[Route('/job-offers', name: 'app_job_offer_all', methods: 'GET')]
     public function all(): Response
     {
+
+        $yourApiKey = $this->getParameter('GEMINI_API_KEY');
+        $client = Gemini::client($yourApiKey);
+
+        $result = $client->geminiPro()->generateContent('Hello');
+        dd($result->text()); // Hello! How can I assist you today?
+
         return $this->render('job_offer/list.html.twig', []);
     }
     #[Route('/job-offers/{id}', name: 'app_job_offer_show', methods: 'GET')]
-    public function show(): Response
-    {        
-        return $this->render('job_offer/list.html.twig', []);
+    public function show(int $id, JobOfferRepository $jobs): Response
+    {
+        $job = $jobs->findOneById($id);
+        return $this->render('job_offer/show.html.twig', ['job' => $job]);
     }
     #[Route('/job-offers/{id}/edit', name: 'app_job_offer_edit', methods: ['GET', 'POST'])]
-    public function edit(): Response
+    public function edit(int $id, Request $request, JobOfferRepository $jobs, EntityManagerInterface $em): Response
     {
-        return $this->render('job_offer/edit.html.twig', []);
+        $job = $jobs->findOneById($id);
+
+        if ($job->getAppUser() !== $this->getUser()) {
+            $this->addFlash('error', 'You are not authorized to edit this note');
+            return $this->redirectToRoute('app_job_offer_all');
+        }
+
+        $form = $this->createForm(JobOfferType::class, $job);
+        $form = $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($job);
+            $em->flush();
+
+            $this->addFlash('success', 'Your note has been updated');
+            return $this->redirectToRoute('app_job_offer_show', ['id' => $job->getId()]);
+        }
+
+        return $this->render('job_offer/edit.html.twig', ['formJobOffer' => $form]);
     }
-    #[Route('/job-offers/{id}/delete', name: 'app_job_offer_delete', methods: ['POST'])]
-    public function delete(): Response
+    #[Route('/job-offers/{id}/delete', name: 'app_job_offer_delete', methods: ['GET', 'POST'])]
+    public function delete(int $id, EntityManagerInterface $em, JobOfferRepository $jobs): Response
     {
+        $job = $jobs->findOneById($id);
+
+        if ($job->getAppUser() !== $this->getUser()) {
+
+            $this->addFlash('error', 'You are not authorized to edit this note');
+            return $this->redirectToRoute('app_job_offer_all');
+        }
+
+        $em->remove($job);
+        $em->flush();
+
+        $this->addFlash('success', 'Your note has been updated');
         return $this->redirectToRoute('app_dashboard');
     }
     #[Route('/job-offer/new', name: 'app_job_offer_new', methods: ['GET', 'POST'])]

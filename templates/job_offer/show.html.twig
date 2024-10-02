@@ -1,7 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello JobOfferController!{% endblock %}
+{% block title %}
+	{{job.title}}
+{% endblock %}
 
 {% block body %}
-MAUVAISE ROUTE
+	<section>
+		<div>
+			<a href="{{path('app_job_offer_edit', {'id' : job.id})}}">
+				<button>MODIFIER</button>
+			</a>
+			<a href="{{path('app_job_offer_delete', {'id' : job.id})}}">
+				<button>SUPPRIMER</button>
+			</a>
+		</div>
+		<button>{{job.status}}</button>
+	</section>
+	<section>
+		<h1>{{job.title}}</h1>
+		<h2>{{job.company}}</h2>
+		{% if job.link is not null %}
+			<a href="{{job.link}}">Lien de l'offre</a>
+		{% endif %}
+		{% if job.location is not null %}
+			<h3>Adresse :
+				{{job.location}}
+			</h3>
+		{% endif %}
+		<div>
+			{% if job.contact_person is defined %}
+				<p>Contact :
+					{{job.contact_person}}
+				</p>
+			{% endif %}
+			{% if job.contact_email is defined %}
+				<p>Contact Email:
+					{{job.contact_email}}
+				</p>
+			{% endif %}
+		</div>
+		{% if job.salary is defined %}
+			<p>Salaire :
+				{{job.salary}}
+			</p>
+		{% endif %}
+		{% if job.application_date is defined %}
+			<p>Date de postulation :
+				{{job.application_date}}</p>
+		{% endif %}
+	</section>
 {% endblock %}

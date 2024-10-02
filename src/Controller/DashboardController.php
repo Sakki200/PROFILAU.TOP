@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\CoverLetterRepository;
-use App\Repository\JobOfferRepository;
-use App\Repository\LinkedInMessageRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -14,14 +12,15 @@ class DashboardController extends AbstractController
 {
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[Route('/dashboard', name: 'app_dashboard', methods: ['GET'])]
-    public function dashboard(JobOfferRepository $jobs, CoverLetterRepository $letters, LinkedInMessageRepository $msg): Response
+    public function dashboard(UserRepository $user): Response
     {
-        $jobs->findBy(['app_user' => $this->getUser()]);
-        dd($jobs->getJobOffer());
-        $letters->findBy(['app_user' => $this->getUser()]);
-        $msg->findBy(['app_user' => $this->getUser()]);
+        $user = $user->findOneById($this->getUser()->getId());
 
 
-        return $this->render('dashboard/index.html.twig', ['jobs' => $jobs, 'letters' => $letters, 'messages' => $msg]);
+        return $this->render('dashboard/index.html.twig', [
+            'jobs' => $user->getJobOffers(),
+            'letters' => $user->getCoverLetters(),
+            'messages' => $user->getLinkedInMessages()
+        ]);
     }
 }

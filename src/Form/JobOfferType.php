@@ -21,11 +21,11 @@ class JobOfferType extends AbstractType
         $builder
             ->add('status', ChoiceType::class, [
                 'choices'  => [
-                    'A postuler' => 'send',
-                    'En attente' => 'waiting',
-                    'Entretien' => 'interview',
-                    'Refusé' => 'rejected',
-                    'Accepté' => 'accepted'
+                    'A postuler' => 'A postuler',
+                    'En attente' => 'En attente',
+                    'Entretien' => 'Entretien',
+                    'Refusé' => 'Refusé',
+                    'Accepté' => 'Accepté'
                 ],
                 'label' => "Statut de la demande :"
             ])
@@ -40,7 +40,7 @@ class JobOfferType extends AbstractType
                 'required' => false
             ])
             ->add('location', TextType::class, [
-                'label' => "Lieu de l'offre :",
+                'label' => "Adresse de l'offre :",
                 'required' => false
             ])
             ->add('salary', TextType::class, [

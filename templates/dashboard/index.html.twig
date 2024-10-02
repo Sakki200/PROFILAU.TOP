@@ -8,21 +8,21 @@
 		{{app.user.firstName}}</h1>
 	<article>
 		<section>
-			<a href="{{path('app_job_offer_new')}}">Nouvelle candidature ?</a>
+			<a href="{{path('app_job_offer_new')}}">Nouvelle candidature ?</a><br>
 			{% for item in jobs %}
-				<a href="{{path('app_job_offer_show', {'id' : item.id})}}">{{item.title}}</a>
+				<a href="{{path('app_job_offer_show', {'id' : item.id})}}">{{item.title}}</a><br>
 			{% endfor %}
 		</section>
 		<section>
-			<a href="{{path('app_cover_letter_generate')}}">Générer une lettre de motivation</a>
+			<a href="{{path('app_cover_letter_generate')}}">Générer une lettre de motivation</a><br>
 			{% for item in letters %}
-				<a href="{{path('app_cover_letter_show', {'id' : item.id})}}">{{item.title}}</a>
+				<a href="{{path('app_cover_letter_show', {'id' : item.id})}}">{{item.title}}</a><br>
 			{% endfor %}
 		</section>
 		<section>
-			<a href="{{path('app_linkedin_generate')}}">Générez un message Linkedin</a>
+			<a href="{{path('app_linkedin_generate')}}">Générez un message Linkedin</a><br>
 			{% for item in messages %}
-				<a href="{{path('app_linkedin_show', {'id' : item.id})}}">{{item.title}}</a>
+				<a href="{{path('app_linkedin_show', {'id' : item.id})}}">{{item.title}}</a><br>
 			{% endfor %}
 		</section>
 	</article>
