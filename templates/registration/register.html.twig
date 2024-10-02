@@ -1,20 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RegistrationController!{% endblock %}
+{% block title %}Hello RegistrationController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	{% if app.user %}
+		<div class="mb-3">
+			You are logged in as
+			{{ app.user.userIdentifier }}<br>
+			Would you like to
+			<a href="{{ path('app_logout') }}">Logout ?</a>
+		</div>
+	{% else %}
+		<div class="my-10 p-4 rounded-md shadow-md bg-slate-50 w-80">
+			{{ form_errors(formRegister) }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/nilki/Desktop/Cours/SYMFONY/profilau_top/src/Controller/RegistrationController.php</code></li>
-        <li>Your template at <code>C:/Users/nilki/Desktop/Cours/SYMFONY/profilau_top/templates/registration/index.html.twig</code></li>
-    </ul>
-</div>
+			{{ form_start(formRegister) }}
+			{{ form_row(formRegister.firstName, {
+                attr: {
+                    class: 'border'
+                }
+            }) }}
+			{{ form_row(formRegister.lastName, {
+                attr: {
+                    class: 'border'
+                }
+            }) }}
+			{{ form_row(formRegister.email, {
+                attr: {
+                    class: 'border'
+                }
+            }) }}
+			{{ form_row(formRegister.password, {
+                attr: {
+                    class: 'border'
+                }
+            }) }}
+			{{ form_row(formRegister.submit, {
+                attr: {
+                    class: 'border'
+                }
+            }) }}
+			{{ form_end(formRegister) }}
+		</div>
+		<p class="text-center text-slate-600 mb-4 text-sm pb-48">Already have an account?
+			<a href="{{ path('app_login') }}" class="text-violet-600">Sign in</a>
+		</p>
+	{% endif %}
 {% endblock %}

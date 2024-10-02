@@ -9,8 +9,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class DashboardController extends AbstractController
 {
-    #[IsGranted(['ROLE_USER'])]
-    #[Route('/dashboard', name: 'app_dashboard', method: ['GET'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[Route('/dashboard', name: 'app_dashboard', methods: ['GET'])]
     public function dashboard(): Response
     {
         return $this->render('dashboard/index.html.twig', []);
