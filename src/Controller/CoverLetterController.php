@@ -18,6 +18,6 @@ class CoverLetterController extends AbstractController
     #[Route('/cover-letter/{id}', name: 'app_cover_letter_show', methods: 'GET')]
     public function show(): Response
     {
-        return $this->render('cover_latter/show.html.twig', []);
+        return $this->render('cover_letter/show.html.twig', []);
     }
 }
