@@ -6,7 +6,6 @@ use App\Entity\JobOffer;
 use App\Form\JobOfferType;
 use App\Repository\JobOfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Gemini;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,12 +18,6 @@ class JobOfferController extends AbstractController
     #[Route('/job-offers', name: 'app_job_offer_all', methods: 'GET')]
     public function all(): Response
     {
-
-        $yourApiKey = $this->getParameter('GEMINI_API_KEY');
-        $client = Gemini::client($yourApiKey);
-
-        $result = $client->geminiPro()->generateContent('Hello');
-        dd($result->text()); // Hello! How can I assist you today?
 
         return $this->render('job_offer/list.html.twig', []);
     }
@@ -86,7 +79,7 @@ class JobOfferController extends AbstractController
             $em->persist($job);
             $em->flush();
 
-            return $this->redirectToRoute('/job-offers/' . $job->getId());
+            return $this->redirectToRoute('app_job_offer_show', ['id' => $job->getId()]);
         }
 
         return $this->render('job_offer/new.html.twig', ['formJobOffer' => $form]);

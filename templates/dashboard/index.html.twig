@@ -11,18 +11,24 @@
 			<a href="{{path('app_job_offer_new')}}">Nouvelle candidature ?</a><br>
 			{% for item in jobs %}
 				<a href="{{path('app_job_offer_show', {'id' : item.id})}}">{{item.title}}</a><br>
-			{% endfor %}
-		</section>
-		<section>
-			<a href="{{path('app_cover_letter_generate')}}">Générer une lettre de motivation</a><br>
-			{% for item in letters %}
-				<a href="{{path('app_cover_letter_show', {'id' : item.id})}}">{{item.title}}</a><br>
-			{% endfor %}
-		</section>
-		<section>
-			<a href="{{path('app_linkedin_generate')}}">Générez un message Linkedin</a><br>
-			{% for item in messages %}
-				<a href="{{path('app_linkedin_show', {'id' : item.id})}}">{{item.title}}</a><br>
+				<div>
+					{% for coverLetter in item.coverLetters %}
+						<a href="{{path('app_cover_letter_show', {'id' : coverLetter.id})}}">Lettre de motivation du
+							{{coverLetter.createdAt|date('d/m/Y')}}</a>
+						<a href="{{path('app_cover_letter_delete', {'id' : coverLetter.id})}}">
+							<button>DELETE</button>
+						</a>
+						<br>
+					{% endfor %}
+					{% for linkedInMessage in item.linkedInMessages %}
+						<a href="{{path('app_cover_letter_show', {'id' : linkedInMessage.id})}}">Message LinkedIn du
+							{{linkedInMessage.createdAt|date('d/m/Y')}}</a>
+						<a href="{{path('app_cover_letter_delete', {'id' : linkedInMessage.id})}}">
+							<button>DELETE</button>
+						</a>
+						<br>
+					{% endfor %}
+				</div>
 			{% endfor %}
 		</section>
 	</article>

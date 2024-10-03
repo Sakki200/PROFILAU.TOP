@@ -1,20 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello KanbanController!{% endblock %}
+{% block title %}Kanban
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/nilki/Desktop/Cours/SYMFONY/profilau_top/src/Controller/KanbanController.php</code></li>
-        <li>Your template at <code>C:/Users/nilki/Desktop/Cours/SYMFONY/profilau_top/templates/kanban/index.html.twig</code></li>
-    </ul>
-</div>
+	<h1>Suivis de votre avancement</h1>
+	<article>
+		<section>
+			<h2>A postuler</h2>
+			{% for item in jobs %}
+				{% if item.status == 'A postuler' %}
+					<h3>{{item.title}}</h3>
+				{% endif %}
+			{% endfor %}
+		</section>
+		<section>
+			<h2>En attente</h2>
+			{% for item in jobs %}
+				{% if item.status == 'En attente' %}
+					<h3>{{item.title}}</h3>
+				{% endif %}
+			{% endfor %}
+		</section>
+		<section>
+			<h2>Entretien</h2>
+			{% for item in jobs %}
+				{% if item.status == 'Entretien' %}
+					<h3>{{item.title}}</h3>
+				{% endif %}
+			{% endfor %}
+		</section>
+		<section>
+			<h2>Accepté</h2>
+			{% for item in jobs %}
+				{% if item.status == 'Accepté' %}
+					<h3>{{item.title}}</h3>
+				{% endif %}
+			{% endfor %}
+		</section>
+		<section>
+			<h2>Refusé</h2>
+			{% for item in jobs %}
+				{% if item.status == 'Refusé' %}
+					<h3>{{item.title}}</h3>
+				{% endif %}
+			{% endfor %}
+		</section>
+	</article>
 {% endblock %}

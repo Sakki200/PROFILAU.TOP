@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\JobOfferRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,8 +13,10 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class KanbanController extends AbstractController
 {
     #[Route('/kanban', name: 'app_kanban', methods: ['GET'])]
-    public function show(): Response
+    public function show(UserRepository $users): Response
     {
-        return $this->render('kanban/index.html.twig', []);
+        $user = $users->findOneById(['id' => $this->getUser()->getId()]);
+
+        return $this->render('kanban/index.html.twig', ["jobs" => $user->getJobOffers()]);
     }
 }
