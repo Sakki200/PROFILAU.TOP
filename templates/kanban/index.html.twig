@@ -4,85 +4,111 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Suivis de votre avancement</h1>
-	<article class="grid grid-cols-5">
-		<section>
+	<h1 class="text-center mt-16">Suivis de votre avancement</h1>
+	<div class="w-2/6 h-0.5 bg-orange-400 m-auto mb-8"></div>
+	<article class="grid grid-cols-5 gap-4 w-5/6 m-auto">
+		<section class="kanbanSection">
 			<h2>A postuler</h2>
+			<div class="w-2/4 h-0.5 m-auto bg-blue-400"></div>
 			{% for item in jobs %}
 				{% if item.status == 'A postuler' %}
-					<h3>{{item.title}}</h3>
-					<h4>Entreprise :
-						{{item.company}}</h4>
-					{% for cl in item.coverLetters %}
-						<p>oui</p>
-					{% endfor %}
-					{% for lm in item.linkedInMessages %}
-						<p>oui</p>
-					{% endfor %}
+					<div class="container step1">
+						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
+						<h4>Entreprise :
+							{{item.company}}</h4>
+						<div class="flex">
+							{% for cl in item.coverLetters %}
+								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+							{% for lm in item.linkedInMessages %}
+								<a href="{{path('app_linkedin_show', {'id': lm.id})}}">{{ ux_icon('mdi:linkedin', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+						</div>
+					</div>
 				{% endif %}
 			{% endfor %}
 		</section>
-		<section>
+		<section class="kanbanSection">
 			<h2>En attente</h2>
+			<div class="w-2/4 h-0.5 m-auto bg-cyan-400"></div>
 			{% for item in jobs %}
 				{% if item.status == 'En attente' %}
-					<h3>{{item.title}}</h3>
-					<h4>Entreprise :
-						{{item.company}}</h4>
-					{% for cl in item.coverLetters %}
-						<p>oui</p>
-					{% endfor %}
-					{% for lm in item.linkedInMessages %}
-						<p>oui</p>
-					{% endfor %}
+					<div class="container step2">
+						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
+						<h4>Entreprise :
+							{{item.company}}</h4>
+						<div class="flex">
+							{% for cl in item.coverLetters %}
+								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+							{% for lm in item.linkedInMessages %}
+								<a href="{{path('app_linkedin_show', {'id': lm.id})}}">{{ ux_icon('mdi:linkedin', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+						</div>
+					</div>
 				{% endif %}
 			{% endfor %}
 		</section>
-		<section>
+		<section class="kanbanSection">
 			<h2>Entretien</h2>
+			<div class="w-2/4 h-0.5 m-auto bg-emerald-400"></div>
 			{% for item in jobs %}
 				{% if item.status == 'Entretien' %}
-					<h3>{{item.title}}</h3>
-					<h4>Entreprise :
-						{{item.company}}</h4>
-					{% for cl in item.coverLetters %}
-						<p>oui</p>
-					{% endfor %}
-					{% for lm in item.linkedInMessages %}
-						<p>oui</p>
-					{% endfor %}
+					<div class="container step3">
+						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
+						<h4>Entreprise :
+							{{item.company}}</h4>
+						<div class="flex">
+							{% for cl in item.coverLetters %}
+								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+							{% for lm in item.linkedInMessages %}
+								<a href="{{path('app_linkedin_show', {'id': lm.id})}}">{{ ux_icon('mdi:linkedin', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+						</div>
+					</div>
 				{% endif %}
 			{% endfor %}
 		</section>
-		<section>
+		<section class="kanbanSection">
 			<h2>Accepté</h2>
+			<div class="w-2/4 h-0.5 m-auto bg-green-400"></div>
 			{% for item in jobs %}
 				{% if item.status == 'Accepté' %}
-					<h3>{{item.title}}</h3>
-					<h4>Entreprise :
-						{{item.company}}</h4>
-					{% for cl in item.coverLetters %}
-						<p>oui</p>
-					{% endfor %}
-					{% for lm in item.linkedInMessages %}
-						<p>oui</p>
-					{% endfor %}
+					<div class="container step4">
+						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
+						<h4>Entreprise :
+							{{item.company}}</h4>
+						<div class="flex">
+							{% for cl in item.coverLetters %}
+								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+							{% for lm in item.linkedInMessages %}
+								<a href="{{path('app_linkedin_show', {'id': lm.id})}}">{{ ux_icon('mdi:linkedin', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+						</div>
+					</div>
 				{% endif %}
 			{% endfor %}
 		</section>
-		<section>
+		<section class="kanbanSection">
 			<h2>Refusé</h2>
+			<div class="w-2/4 h-0.5 m-auto bg-red-400"></div>
 			{% for item in jobs %}
 				{% if item.status == 'Refusé' %}
-					<h3>{{item.title}}</h3>
-					<h4>Entreprise :
-						{{item.company}}</h4>
-					{% for cl in item.coverLetters %}
-						<p>oui</p>
-					{% endfor %}
-					{% for lm in item.linkedInMessages %}
-						<p>oui</p>
-					{% endfor %}
+					<div class="container step5">
+						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
+						<h4>Entreprise :
+							{{item.company}}</h4>
+						<div class="flex">
+							{% for cl in item.coverLetters %}
+								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+							{% for lm in item.linkedInMessages %}
+								<a href="{{path('app_linkedin_show', {'id': lm.id})}}">{{ ux_icon('mdi:linkedin', {'class': 'h-8 w-8'}) }}</a>
+							{% endfor %}
+						</div>
+					</div>
 				{% endif %}
 			{% endfor %}
 		</section>

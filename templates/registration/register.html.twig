@@ -13,35 +13,15 @@
 			<a href="{{ path('app_logout') }}">Logout ?</a>
 		</div>
 	{% else %}
-		<div class="my-10 p-4 rounded-md shadow-md bg-slate-50 w-80">
-			{{ form_errors(formRegister) }}
 
+		<div class="flex justify-center m-auto mt-24 p-4 rounded-md shadow-md bg-slate-50 w-80">
+			{{ form_errors(formRegister) }}
 			{{ form_start(formRegister) }}
-			{{ form_row(formRegister.firstName, {
-                attr: {
-                    class: 'border'
-                }
-            }) }}
-			{{ form_row(formRegister.lastName, {
-                attr: {
-                    class: 'border'
-                }
-            }) }}
-			{{ form_row(formRegister.email, {
-                attr: {
-                    class: 'border'
-                }
-            }) }}
-			{{ form_row(formRegister.password, {
-                attr: {
-                    class: 'border'
-                }
-            }) }}
-			{{ form_row(formRegister.submit, {
-                attr: {
-                    class: 'border'
-                }
-            }) }}
+			{{ form_row(formRegister.firstName) }}
+			{{ form_row(formRegister.lastName) }}
+			{{ form_row(formRegister.email) }}
+			{{ form_row(formRegister.password) }}
+			{{ form_row(formRegister.submit) }}
 			{{ form_end(formRegister) }}
 		</div>
 		<p class="text-center text-slate-600 mb-4 text-sm pb-48">Already have an account?

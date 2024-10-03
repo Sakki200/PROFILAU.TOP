@@ -18,7 +18,10 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'attr' => ['class' => 'block w-full mt-1 p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm'],
+                'label_attr' => ['class' => 'block text-sm font-medium text-gray-700']
+            ])
             ->add('password', PasswordType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -28,16 +31,26 @@ class RegistrationType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
+                'attr' => ['class' => 'block w-full mt-1 p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm'],
+                'label_attr' => ['class' => 'block text-sm font-medium text-gray-700']
             ])
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('submit', SubmitType::class)
+            ->add('firstName', TextType::class, [
+                'attr' => ['class' => 'block w-full mt-1 p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm'],
+                'label_attr' => ['class' => 'block text-sm font-medium text-gray-700']
+            ])
+            ->add('lastName', TextType::class, [
+                'attr' => ['class' => 'block w-full mt-1 p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm'],
+                'label_attr' => ['class' => 'block text-sm font-medium text-gray-700']
+            ])
+            ->add('submit', SubmitType::class, [
+                'attr' => ['class' => 'inline-flex justify-center mt-2 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500']
+            ])
         ;
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
