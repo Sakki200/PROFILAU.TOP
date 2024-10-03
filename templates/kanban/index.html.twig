@@ -5,12 +5,20 @@
 
 {% block body %}
 	<h1>Suivis de votre avancement</h1>
-	<article>
+	<article class="grid grid-cols-5">
 		<section>
 			<h2>A postuler</h2>
 			{% for item in jobs %}
 				{% if item.status == 'A postuler' %}
 					<h3>{{item.title}}</h3>
+					<h4>Entreprise :
+						{{item.company}}</h4>
+					{% for cl in item.coverLetters %}
+						<p>oui</p>
+					{% endfor %}
+					{% for lm in item.linkedInMessages %}
+						<p>oui</p>
+					{% endfor %}
 				{% endif %}
 			{% endfor %}
 		</section>
@@ -19,6 +27,14 @@
 			{% for item in jobs %}
 				{% if item.status == 'En attente' %}
 					<h3>{{item.title}}</h3>
+					<h4>Entreprise :
+						{{item.company}}</h4>
+					{% for cl in item.coverLetters %}
+						<p>oui</p>
+					{% endfor %}
+					{% for lm in item.linkedInMessages %}
+						<p>oui</p>
+					{% endfor %}
 				{% endif %}
 			{% endfor %}
 		</section>
@@ -27,6 +43,14 @@
 			{% for item in jobs %}
 				{% if item.status == 'Entretien' %}
 					<h3>{{item.title}}</h3>
+					<h4>Entreprise :
+						{{item.company}}</h4>
+					{% for cl in item.coverLetters %}
+						<p>oui</p>
+					{% endfor %}
+					{% for lm in item.linkedInMessages %}
+						<p>oui</p>
+					{% endfor %}
 				{% endif %}
 			{% endfor %}
 		</section>
@@ -35,6 +59,14 @@
 			{% for item in jobs %}
 				{% if item.status == 'Accepté' %}
 					<h3>{{item.title}}</h3>
+					<h4>Entreprise :
+						{{item.company}}</h4>
+					{% for cl in item.coverLetters %}
+						<p>oui</p>
+					{% endfor %}
+					{% for lm in item.linkedInMessages %}
+						<p>oui</p>
+					{% endfor %}
 				{% endif %}
 			{% endfor %}
 		</section>
@@ -43,6 +75,14 @@
 			{% for item in jobs %}
 				{% if item.status == 'Refusé' %}
 					<h3>{{item.title}}</h3>
+					<h4>Entreprise :
+						{{item.company}}</h4>
+					{% for cl in item.coverLetters %}
+						<p>oui</p>
+					{% endfor %}
+					{% for lm in item.linkedInMessages %}
+						<p>oui</p>
+					{% endfor %}
 				{% endif %}
 			{% endfor %}
 		</section>
