@@ -32,8 +32,9 @@ class LinkedInMessageController extends AbstractController
             $result = $client->geminiPro()->generateContent(
                 "Je veux une message privé linkedin pour la compagnie " . $company . " pour le poste de " . $title . ". 
                 Voici les informations pour aider la création de la lettre de motivation :
-                Mon nom est " . $lastName . ' et prénom est ' . $firstName . '. 
-                '
+                Mon nom est " . $lastName . ' et prénom est ' . $firstName . ".
+                Je voudrais qu'à chaque saut de ligne tu me rajoutes la balise html <br>. 
+                "
             );
 
             $lm = new LinkedInMessage;
@@ -49,9 +50,11 @@ class LinkedInMessageController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
     #[Route('/linkedin-message/{id}', name: 'app_linkedin_show', methods: 'GET')]
-    public function show(): Response
+    public function show(int $id, LinkedInMessageRepository $lms): Response
     {
-        return $this->render('linkedin_message/show.html.twig', []);
+        $lm = $lms->findOneById($id);
+
+        return $this->render('linkedin_message/show.html.twig', ['jobOfferName' => $lm->getJobOffer()->getTitle(), 'LMContent' => $lm->getContent()]);
     }
 
     #[Route('/cover-letter/{id}/delete', name: 'app_cover_letter_delete', methods: ['GET', 'POST'])]

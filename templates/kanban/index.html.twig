@@ -16,6 +16,7 @@
 						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
 						<h4>Entreprise :
 							{{item.company}}</h4>
+						<div class="text-black my-2">{{ include('components/changeStatus.html.twig') }}</div>
 						<div class="flex">
 							{% for cl in item.coverLetters %}
 								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>
@@ -37,6 +38,7 @@
 						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
 						<h4>Entreprise :
 							{{item.company}}</h4>
+						<div class="text-black my-2">{{ include('components/changeStatus.html.twig') }}</div>
 						<div class="flex">
 							{% for cl in item.coverLetters %}
 								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>
@@ -58,6 +60,7 @@
 						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
 						<h4>Entreprise :
 							{{item.company}}</h4>
+						<div class="text-black my-2">{{ include('components/changeStatus.html.twig') }}</div>
 						<div class="flex">
 							{% for cl in item.coverLetters %}
 								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>
@@ -79,6 +82,7 @@
 						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
 						<h4>Entreprise :
 							{{item.company}}</h4>
+						<div class="text-black my-2">{{ include('components/changeStatus.html.twig') }}</div>
 						<div class="flex">
 							{% for cl in item.coverLetters %}
 								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>
@@ -100,6 +104,7 @@
 						<a href="{{path('app_job_offer_show', {'id':item.id})}}" class="text-lg font-semibold underline">{{item.title|capitalize}}</a>
 						<h4>Entreprise :
 							{{item.company}}</h4>
+						<div class="text-black my-2">{{ include('components/changeStatus.html.twig') }}</div>
 						<div class="flex">
 							{% for cl in item.coverLetters %}
 								<a href="{{path('app_cover_letter_show', {'id': cl.id})}}">{{ ux_icon('mdi:letter-l-box-outline', {'class': 'h-8 w-8'}) }}</a>

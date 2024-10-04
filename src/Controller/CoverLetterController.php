@@ -26,14 +26,15 @@ class CoverLetterController extends AbstractController
             $title = $job->getTitle();
             $firstName = $user->getFirstName();
             $lastName = $user->getLastName();
+
             //GESTION DE GEMINI AI
             $yourApiKey = $this->getParameter('GEMINI_API_KEY');
             $client = Gemini::client($yourApiKey);
             $result = $client->geminiPro()->generateContent(
                 "Je veux une lettre de motivation pour la compagnie " . $company . " pour le poste de " . $title . ". 
                 Voici les informations pour aider la création de la lettre de motivation :
-                Mon nom est " . $lastName . ' et prénom est ' . $firstName . '. 
-                '
+                Mon nom est " . $lastName . ' et mon prénom est ' . $firstName . "
+                Je voudrais qu'à chaque saut de ligne tu me rajoutes la balise html <br>."
             );
 
             $cl = new CoverLetter;
@@ -49,9 +50,12 @@ class CoverLetterController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
     #[Route('/cover-letter/{id}', name: 'app_cover_letter_show', methods: 'GET')]
-    public function show(): Response
+    public function show(int $id, CoverLetterRepository $cls): Response
     {
-        return $this->render('cover_letter/show.html.twig', []);
+        $cl = $cls->findOneById($id);
+
+
+        return $this->render('cover_letter/show.html.twig', ['jobOfferName' => $cl->getJobOffer()->getTitle(), 'CLContent' => $cl->getContent()]);
     }
 
     #[Route('/cover-letter/{id}/delete', name: 'app_cover_letter_delete', methods: ['GET', 'POST'])]

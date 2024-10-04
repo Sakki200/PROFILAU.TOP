@@ -16,10 +16,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class JobOfferController extends AbstractController
 {
     #[Route('/job-offers', name: 'app_job_offer_all', methods: 'GET')]
-    public function all(): Response
+    public function all(JobOfferRepository $jor): Response
     {
+        $jobs = $jor->findBy(['app_user' => $this->getUser()]);
 
-        return $this->render('job_offer/list.html.twig', []);
+        return $this->render('job_offer/list.html.twig', ['jobs' => $jobs]);
     }
     #[Route('/job-offers/{id}', name: 'app_job_offer_show', methods: 'GET')]
     public function show(int $id, JobOfferRepository $jobs): Response
@@ -83,5 +84,38 @@ class JobOfferController extends AbstractController
         }
 
         return $this->render('job_offer/new.html.twig', ['formJobOffer' => $form]);
+    }
+
+    #[Route('/api/job-offers/update-status/{id}', name: 'app_job_offer_status', methods: ['POST'])]
+    public function changeStatus(int $id, Request $request, EntityManagerInterface $em,  JobOfferRepository $jr): Response
+    {
+        $job = $jr->findOneById($id);
+        if ($job->getAppUser() == $this->getUser()) {
+            $status = $request->request->get('status');
+            switch ($status) {
+                case 0:
+                    $job->setStatus('A postuler');
+                    break;
+                case 1:
+                    $job->setStatus('En attente');
+                    break;
+                case 2:
+                    $job->setStatus('Entretien');
+                    break;
+                case 3:
+                    $job->setStatus('Refusé');
+                    break;
+                case 4:
+                    $job->setStatus('Accepté');
+                    break;
+            }
+
+            $em->persist($job);
+            $em->flush();
+            $url = $request->headers->get('referer');
+
+            return $this->redirect($url);
+        }
+        return $this->redirectToRoute('app_home');
     }
 }

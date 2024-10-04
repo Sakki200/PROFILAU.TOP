@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\JobOfferRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,15 +13,14 @@ class DashboardController extends AbstractController
 {
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[Route('/dashboard', name: 'app_dashboard', methods: ['GET'])]
-    public function dashboard(UserRepository $user): Response
+    public function dashboard(JobOfferRepository $jbr, UserRepository $ur): Response
     {
-        $user = $user->findOneById($this->getUser()->getId());
+        $user = $ur->findOneById($this->getUser()->getId());
+        $jobs = $jbr->findBy(['app_user' => $user], ['createdAt' => 'DESC'], 4);
 
 
         return $this->render('dashboard/index.html.twig', [
-            'jobs' => $user->getJobOffers(),
-            'letters' => $user->getCoverLetters(),
-            'messages' => $user->getLinkedInMessages()
+            'jobs' => $jobs
         ]);
     }
 }
