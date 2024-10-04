@@ -29,9 +29,9 @@
 						<br>
 					{% endfor %}
 					{% for linkedInMessage in item.linkedInMessages %}
-						<a href="{{path('app_cover_letter_show', {'id' : linkedInMessage.id})}}">Message LinkedIn du
+						<a href="{{path('app_linkedin_show', {'id' : linkedInMessage.id})}}">Message LinkedIn du
 							{{linkedInMessage.createdAt|date('d/m/Y')}}</a>
-						<a href="{{path('app_cover_letter_delete', {'id' : linkedInMessage.id})}}">
+						<a href="{{path('app_linkedin_delete', {'id' : linkedInMessage.id})}}">
 							<button>{{ ux_icon('mdi:trash-can-outline', {'class' : 'h-6 w-6 text-red-500 text-center hover:text-red-300'}) }}</button>
 
 						</a>
