@@ -57,7 +57,7 @@ class LinkedInMessageController extends AbstractController
         return $this->render('linkedin_message/show.html.twig', ['jobOfferName' => $lm->getJobOffer()->getTitle(), 'LMContent' => $lm->getContent()]);
     }
 
-    #[Route('/cover-letter/{id}/delete', name: 'app_linkedin_delete', methods: ['GET', 'POST'])]
+    #[Route('/linkedin-message/{id}/delete', name: 'app_linkedin_delete', methods: ['GET', 'POST'])]
     public function delete(int $id, EntityManagerInterface $em, LinkedInMessageRepository $lms): Response
     {
         $lm = $lms->findOneById($id);

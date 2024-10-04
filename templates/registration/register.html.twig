@@ -13,8 +13,8 @@
 			<a href="{{ path('app_logout') }}">Logout ?</a>
 		</div>
 	{% else %}
-
-		<div class="flex justify-center m-auto mt-24 p-4 rounded-md shadow-md bg-slate-50 w-80">
+		<h1 class="text-center mt-24">Inscrivez-vous</h1>
+		<div class="flex justify-center m-auto mt-4 p-4 rounded-md shadow-md bg-slate-50 w-80">
 			{{ form_errors(formRegister) }}
 			{{ form_start(formRegister) }}
 			{{ form_row(formRegister.firstName) }}
