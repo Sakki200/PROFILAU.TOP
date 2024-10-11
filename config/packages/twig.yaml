@@ -1,5 +1,6 @@
 twig:
     file_name_pattern: '*.twig'
+    # config/packages/twig.yaml
 
 when@test:
     twig:
