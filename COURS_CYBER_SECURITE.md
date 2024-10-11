@@ -7,7 +7,7 @@ Lien pour apprendre à bien l'utiliser :
 Après nos tests, nous nous retrouvons avec beaucoup de flags de failles de sécurité.
 Je vous invite à comprendre ce qu'elles sont avant de commencer à déboguer en demandant à une IA de vous expliquer.
 
-## Tuons ces flags de fails !
+## Tuons ces flags de failles !
 
 ### Configuration de l'environnement de production
 
