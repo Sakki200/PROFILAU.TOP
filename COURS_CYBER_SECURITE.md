@@ -16,6 +16,7 @@ Dans un premier temps, nous allons dans notre .env pour changer :
 APP_ENV=prod
 APP_DEBUG=0
 ```
+Avec ça, beaucoup de soucis seront réglés car le mode dev permet trop de failles ainsi que le debug affiche les erreurs en détail, ce qui est très mauvais pour la sécurité.
 
 De la même façon que pour APP_DEBUG=0, allons faire un tour dans config/packages/monolog.yaml :
 ```yaml
@@ -27,8 +28,6 @@ when@prod:
 ```
 
 Le mode debug par défaut n'est pas du tout approprié en production pour la sécurité.
-
-Avec ça, beaucoup de soucis seront réglés car le mode dev permet trop de failles ainsi que le debug affiche les erreurs en détail, ce qui est très mauvais pour la sécurité.
 
 ### Gestion des headers de sécurité
 
